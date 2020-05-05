@@ -3,19 +3,7 @@
   <div class="col-lg-3">
 
 
-    <div class="list-group">
-      <a routerLink="/category/1" class="list-group-item" 
-      routerLinkActive="bg-ptimary text-blue font-weight-bold">Web
-        Development</a>
-
-      <a routerLink="/category/2" class="list-group-item" 
-      routerLinkActive="bg-ptimary text-blue font-weight-bold">Programming</a>
-
-      <a routerLink="/category/3" class="list-group-item" 
-      routerLinkActive="bg-ptimary text-blue font-weight-bold">Databases</a>
-
-      
-    </div>
+    <app-book-category></app-book-category>
 
   </div>
 
@@ -25,10 +13,10 @@
     <div class="row">
       <div class="col-lg-4 col-md-6 mb-4" *ngFor="let book of books">
         <div class="card h-100">
-          <a href="#"><img class="card-img-top img-responsive" [src]="book.imageUrl"></a>
+          <a routerLink="/books/{{book.id}}"><img class="card-img-top img-responsive" [src]="book.imageUrl"></a>
           <div class="card-body">
             <h4 class="card-title">
-              <a href="#">{{book.name}}</a>
+              <a routerLink="/books/{{book.id}}">{{book.name}}</a>
             </h4>
             <h5>{{book.unitPrice | currency: 'INR'}}</h5>
             <p class="card-text text-truncate">{{book.description}}</p>
@@ -37,6 +25,14 @@
             <button class="btn btn-primary float-right">Add Cart</button>
           </div>
         </div>
+      </div>
+
+      <!--? is safe navigation operator. If the books is not null, or books is not undefined 
+      only then it will evaluate this expression.
+    
+    If books is null or undefined, then ? or safe navigation operator will ignore this-->
+      <div *ngIf="books?.length == 0" class= "col-md-12 alert alert-warning mt-3">
+        No Books Found
       </div>
     </div>
 
